@@ -1,5 +1,6 @@
 import psycopg2
 from simple_ddl_parser import DDLParser
+from sqlite_interface import create_connection
 
 CREATE_TABLE_CONST=["CREATE", "TABLE"]
 DROP_TABLE_CONST=["DROP", "TABLE"]
@@ -7,51 +8,26 @@ ALTER_TABLE_CONST=["ALTER", "TABLE"]
 CREATE_INDEX_CONST=["CREATE","INDEX"]
 DROP_INDEX_CONST=["DROP"," INDEX"]
 
-INIT_TABLES_DISCOVERY_QUERY =  """
-    SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
+INIT_TABLES_DISCOVERY_QUERY = """
+    SELECT name FROM sqlite_master WHERE type='table';
     """
-INIT_TABLE_SCHEMA_DISCOVERY_QUERY =  """
-    SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '{}';
+INIT_TABLE_SCHEMA_DISCOVERY_QUERY = """
+    PRAGMA table_info('{}');
     """
-INIT_INDICES_DISCOVERY_QUERY =  """
-    SELECT indexname, tablename FROM pg_indexes WHERE tablename ='{}';
+INIT_INDICES_DISCOVERY_QUERY = """
+    PRAGMA index_list('{}');
     """
+INIT_INDEX_INFO_QUERY = """
+    PRAGMA index_info('{}');
+    """
+    
+DB_FILE = r"C:\Users\Defozo\Downloads\2\sqlite-dll-win64-x64-3430100\test.d"
 
 class DBConn():
     def __init__(self):
-        self.conn = None
-        self.sql_flavor = "postgresql"
-        # 
-        #   "table_name": {
-        #       "column_name":{
-        #           "type": "<type>",
-        #       }
-        #   }
-        # 
-        self.table_objects = {}
-        # 
-        #   "index_name": {
-        #       "table": "<table_name>",
-        #       "columns": ["<column_name>"],
-        #   }
-        # 
-        self.index_objects = {}
-    
-    def connect(self, host: str, dbname: str, user: str, password: str, sql_flavor: str = "postgresql") -> (bool, dict):
-        conn_string = "dbname={0} user={1} password={2} host={3}".format(
-            dbname,
-            user,
-            password,
-            host
-        )
-        try:
-            self.conn = psycopg2.connect(conn_string)
-        except:
-            return False, None
-        self.sql_flavor = sql_flavor
+        self.conn = create_connection(DB_FILE)
         self.table_objects = self.initial_tables_discovery()
         self.index_objects = self.initial_indices_discovery()
-        return True, {"tables": self.table_objects, "indices": self.index_objects}
     
     def execute_query(self, query: str) -> (list,tuple,bool):
         cursor = self.conn.cursor()
