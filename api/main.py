@@ -8,6 +8,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from helpers import get_config
 from llm import LLMInterface
+from langchain.schema.messages import HumanMessage, AIMessage
 
 def main():
     app = FastAPI()
@@ -27,9 +28,11 @@ def main():
     @app.post("/ask_agent")
     async def ask_agent(req: Request):
         body = await req.json()
+        chat_history = body.get('chat_history', [])
         question=body['question']
-        context=body['context']
-        response, last_sql_query, logs = executor.ask_agent(question, context)
+        chat_history.append(HumanMessage(content=question))
+        response, last_sql_query, logs = executor.ask_agent(question, chat_history)
+        chat_history.append(AIMessage(content=response))
         return {"response": response, "sql_query": last_sql_query, "logs": logs}
     
     @app.post("/execute_sql_query")
