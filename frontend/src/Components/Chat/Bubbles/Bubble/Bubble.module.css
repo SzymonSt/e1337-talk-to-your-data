@@ -1,0 +1,14 @@
+.Bubble {
+  padding: 20px;
+  text-align: left;
+  background-color: inherit;
+  width: 100%;
+  overflow-x: scroll;
+  color: #cbcbcb;
+  white-space: break-spaces;
+}
+
+.BubbleAI {
+  color: #cbcbcb;
+  background-color: #383f49;
+}

@@ -1,0 +1,26 @@
+.Button {
+  border-radius: 0.5em;
+}
+
+.TextareaElement {
+  text-align: left;
+  padding: 10px;
+  width: 100%;
+  color: white;
+  min-height: 38px;
+  border: 1px solid #383f49;
+  max-height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 0.5em;
+  background-color: #414b5a;
+}
+
+.ButtonGroup {
+  display: flex;
+  position: absolute;
+  margin-top: 10px;
+  bottom: 0;
+  right: 0;
+  justify-content: flex-end;
+}

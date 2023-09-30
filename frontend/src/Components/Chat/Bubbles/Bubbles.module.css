@@ -1,0 +1,4 @@
+.Bubbles {
+  overflow-y: scroll;
+  height: calc(100% - 170px);
+}

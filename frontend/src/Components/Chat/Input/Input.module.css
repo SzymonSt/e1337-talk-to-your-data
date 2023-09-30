@@ -1,0 +1,8 @@
+.Input {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  bottom: 0;
+  margin: 20px 20px 10px;
+  width: calc(100% - 40px);
+}

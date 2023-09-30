@@ -1,0 +1,10 @@
+.TableExtension table,
+th,
+td {
+  border: 1px solid;
+}
+
+.TableExtension th,
+td {
+  padding: 10px;
+}
