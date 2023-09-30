@@ -16,11 +16,11 @@ const SQLInput: FC<SQLInputProps> = (props) => {
     setContent(val);
   };
 
-  const onCancelSQLModifyHandler = () => {
+  const onCancelHandler = () => {
     props.onCancelSQLModify?.();
   };
 
-  const onClickHandler = () => {
+  const onExecuteClickHandler = () => {
     props.onExecute(content);
     props.onCancelSQLModify?.();
   };
@@ -30,14 +30,14 @@ const SQLInput: FC<SQLInputProps> = (props) => {
       <Button
         variant="primary"
         className={styles.ExecuteButton}
-        onClick={onClickHandler}
+        onClick={onExecuteClickHandler}
       >
         Execute
       </Button>
       <Button
         variant="dark"
         className={styles.CloseButton}
-        onClick={onCancelSQLModifyHandler}
+        onClick={onCancelHandler}
       >
         X
       </Button>

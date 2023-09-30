@@ -8,7 +8,7 @@ const AIIcon = () => {
   return (
     <div className={styles.Icon}>
       <FontAwesomeIcon icon={faRobot} />
-      <h6>AI</h6>
+      <h6>SQLucjan</h6>
     </div>
   );
 };

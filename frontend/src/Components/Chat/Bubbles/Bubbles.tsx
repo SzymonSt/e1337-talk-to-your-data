@@ -1,18 +1,12 @@
 import React, { FC, useEffect, useRef } from "react";
 import styles from "./Bubbles.module.css";
-import { MessageType, WHO } from "../../../enums";
 import Bubble from "./Bubble/Bubble";
+import { Message } from "../../../types";
 
 interface BubbleProps {
   messages: Message[];
   onSQLModifyClick?: (content: string) => void;
-}
-
-export interface Message {
-  id: number;
-  who: WHO;
-  content: any;
-  type: MessageType;
+  onSQLExecuteClick?: (contents: string) => void;
 }
 
 const Bubbles: FC<BubbleProps> = (props) => {
@@ -39,6 +33,7 @@ const Bubbles: FC<BubbleProps> = (props) => {
       {props.messages.map((message, index) => (
         <Bubble
           onSQLModifyClick={props.onSQLModifyClick}
+          onSQLExecuteClick={props.onSQLExecuteClick}
           who={message.who}
           key={message.id}
           isIconShown={

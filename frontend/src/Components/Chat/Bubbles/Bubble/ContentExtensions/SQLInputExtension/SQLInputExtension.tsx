@@ -7,6 +7,7 @@ import styles from "./SQLInputExtension.module.css";
 interface SQLInputExtensionProps {
   content: string;
   onSQLModifyClick?: (content: string) => void;
+  onSQLExecuteClick?: (contents: string) => void;
 }
 
 const SQLInputExtension: FC<SQLInputExtensionProps> = (props) => {
@@ -19,6 +20,10 @@ const SQLInputExtension: FC<SQLInputExtensionProps> = (props) => {
     props.onSQLModifyClick?.(props.content);
   };
 
+  const onExecuteClickHandler = () => {
+    props.onSQLExecuteClick?.(props.content);
+  };
+
   return (
     <div className={styles.SQLInputExtension}>
       <Button
@@ -27,6 +32,13 @@ const SQLInputExtension: FC<SQLInputExtensionProps> = (props) => {
         onClick={onSQLModifyClickHandler}
       >
         Modify
+      </Button>
+      <Button
+        variant="primary"
+        className={styles.ExecuteButton}
+        onClick={onExecuteClickHandler}
+      >
+        Execute
       </Button>
       <CodeMirror
         value={props.content}
