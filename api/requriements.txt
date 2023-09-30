@@ -1,0 +1,5 @@
+ctransformers==0.2.27
+fastapi==0.70.0
+fastavro==1.8.2
+uvicorn==0.15.0
+langchain[llms,agents]==0.0.290

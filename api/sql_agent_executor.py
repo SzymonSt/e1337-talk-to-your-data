@@ -6,18 +6,17 @@ from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.sql_database import SQLDatabase
 from langchain.llms.openai import OpenAI
-from ctransformers import AutoModelForCausalLM
+from langchain.llms import Ollama
+from langchain.callbacks.manager import CallbackManager
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler 
 from constants import DATABASE_URI
 
 class SQLAgentExecutor:
     def __init__(self, llm_mode: str):
         if llm_mode == 'local':
-            self.llm = AutoModelForCausalLM.from_pretrained(
-                "../model/llama-2-7b-chat.Q5_K_M.gguf",
-                model_type="llama",
-                max_new_tokens=1096,
-                temperature=0.1,
-            )
+            self.llm = Ollama(base_url="http://localhost:11434", 
+             model="llama2", 
+             callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]))
         else:
             self.llm = OpenAI(temperature=0.1)
         self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
