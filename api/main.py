@@ -11,9 +11,16 @@ from helpers import get_config
 from llm import LLMInterface
 from langchain.schema.messages import HumanMessage, AIMessage
 from pydantic import BaseModel
+from typing import Any, Dict, List
+
+class Message(BaseModel):
+    content: str
+    additional_kwargs: Dict[str, Any]
+    type: str
+    example: bool
 
 class AskAgentBody(BaseModel):
-    chat_history: List[str] = []
+    chat_history: List[Message] = []
     question: str
 
 def main():
