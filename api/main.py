@@ -1,3 +1,4 @@
+from typing import List
 from sql_agent_executor import SQLAgentExecutor
 import uvicorn
 import base64
@@ -9,6 +10,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from helpers import get_config
 from llm import LLMInterface
 from langchain.schema.messages import HumanMessage, AIMessage
+from pydantic import BaseModel
+
+class AskAgentBody(BaseModel):
+    chat_history: List[str] = []
+    question: str
 
 def main():
     app = FastAPI()
@@ -26,14 +32,13 @@ def main():
     executor = SQLAgentExecutor(llm_mode)
     
     @app.post("/ask_agent")
-    async def ask_agent(req: Request):
-        body = await req.json()
-        chat_history = body.get('chat_history', [])
-        question=body['question']
+    async def ask_agent(body: AskAgentBody):
+        chat_history = body.chat_history
+        question = body.question
         chat_history.append(HumanMessage(content=question))
         response, last_sql_query, logs = executor.ask_agent(question, chat_history)
         chat_history.append(AIMessage(content=response))
-        return {"response": response, "sql_query": last_sql_query, "logs": logs}
+        return {"response": response, "sql_query": last_sql_query, "logs": logs, "chat_history": chat_history}
     
     @app.post("/execute_sql_query")
     async def execute_sql_query(req: Request):
