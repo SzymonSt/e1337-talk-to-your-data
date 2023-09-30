@@ -1,4 +1,4 @@
-# constants.py
+import os
 
 # Database path
-DATABASE_URI = "sqlite:///C://Users//Defozo//Downloads//2//sqlite-dll-win64-x64-3430100//test.d"
+DATABASE_URI = "sqlite:///D://hackyeah//e1337-talk-to-your-data//api//db//test.d"
