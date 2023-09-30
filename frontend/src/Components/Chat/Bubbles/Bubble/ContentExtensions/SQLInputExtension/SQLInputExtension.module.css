@@ -1,0 +1,13 @@
+.SQLInputExtension {
+  position: relative;
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.ModifyButton {
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  border-radius: 0.5em;
+  top: 0;
+}

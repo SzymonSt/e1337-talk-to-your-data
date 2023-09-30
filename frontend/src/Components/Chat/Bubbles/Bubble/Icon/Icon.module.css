@@ -1,0 +1,7 @@
+.Icon {
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  column-gap: 10px;
+}
