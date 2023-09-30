@@ -1,6 +1,22 @@
 import psycopg2
 from simple_ddl_parser import DDLParser
 from sqlite_interface import create_connection
+from langchain.agents import create_sql_agent
+from langchain.agents.agent_toolkits import SQLDatabaseToolkit
+from langchain.sql_database import SQLDatabase
+from langchain.llms.openai import OpenAI
+
+# Initialize the language model
+llm = OpenAI(temperature=0)
+
+# Initialize the database
+db = SQLDatabase.from_uri("sqlite:///C://Users//Defozo//Downloads//2//sqlite-dll-win64-x64-3430100//test.d")  # TODO: Replace with your database path
+
+# Create the toolkit
+toolkit = SQLDatabaseToolkit(db=db, llm=llm)
+
+# Create the agent
+agent = create_sql_agent(llm=llm, toolkit=toolkit, verbose=True)
 
 CREATE_TABLE_CONST=["CREATE", "TABLE"]
 DROP_TABLE_CONST=["DROP", "TABLE"]
