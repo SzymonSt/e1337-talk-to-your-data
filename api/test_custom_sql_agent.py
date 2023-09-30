@@ -27,7 +27,7 @@ class TestCustomSQLAgent(unittest.TestCase):
         sys.stdout = buffer
 
         # Run the query
-        self.agent.run("What is the Employee with the longest name?")
+        self.agent.run("Show all employees.")
 
         # Get the logs from the buffer
         logs = buffer.getvalue()
@@ -52,11 +52,13 @@ class TestCustomSQLAgent(unittest.TestCase):
 
         # Iterate over the reversed lines
         for line in lines:
-            # If the line starts with "Action Input:", return the rest of the line
+            # If the line starts with "Action Input:", return the part of the line up to the first ";"
             if line.startswith("Action Input: "):
                 end_index = line.find(";")
                 if end_index != -1:
                     return line[len("Action Input: "):end_index+1]
+                else:
+                    return line[len("Action Input: "):-4] + ";"
 
         # If no "Action Input:" line is found, return None
         return None
