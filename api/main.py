@@ -24,6 +24,7 @@ class AskAgentBody(BaseModel):
     question: str
 
 def main():
+
     app = FastAPI()
     app.add_middleware(
         CORSMiddleware,
@@ -44,18 +45,23 @@ def main():
         question = body.question
         chat_history.append(HumanMessage(content=question))
         response, last_sql_query, logs = executor.ask_agent(question, chat_history)
-        chat_history.append(AIMessage(content=response))
+        chat_history.append(AIMessage(content=last_sql_query))
         return {"response": response, "sql_query": last_sql_query, "logs": logs, "chat_history": chat_history}
-    
+
     @app.post("/execute_sql_query")
     async def execute_sql_query(req: Request):
         body = await req.json()
         sql_query=body['query']
+        chat_history=body["chat_history"]
         content = []
         result, columns = executor.execute_sql_query(sql_query)
         for row in result:
             content.append(dict(zip([column[0] for column in columns], row)))
-        return {"result": content}
+
+        chat_history.append(HumanMessage(content=sql_query))
+        chat_history.append(AIMessage(content=json.dumps(content)))
+
+        return {"result": content, "chat_history": chat_history}
     
 
     uvicorn.run(app, host="0.0.0.0", port=8081)

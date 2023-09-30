@@ -2,12 +2,13 @@ import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "../constants";
 
 interface AskAgentPayload {
-  chat_history: string[];
+  chat_history: Object[];
   question: string;
 }
 
 interface ExecuteSqlQueryPayload {
   query: string;
+  chat_history: Object[];
 }
 
 class LangChainService {
@@ -19,7 +20,7 @@ class LangChainService {
     });
   }
 
-  async askAgent(chatHistory: string[], question: string) {
+  async askAgent(chatHistory: Object[], question: string) {
     const payload: AskAgentPayload = {
       chat_history: chatHistory,
       question: question,
@@ -28,9 +29,10 @@ class LangChainService {
     return response.data;
   }
 
-  async executeSqlQuery(sqlQuery: string) {
+  async executeSqlQuery(chatHistory: Object[], sqlQuery: string) {
     const payload: ExecuteSqlQueryPayload = {
       query: sqlQuery,
+      chat_history: chatHistory,
     };
     const response = await this.client.post("/execute_sql_query", payload);
     return response.data;

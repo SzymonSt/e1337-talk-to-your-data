@@ -1,0 +1,20 @@
+.TopNavbar {
+  min-height: 60px;
+  width: 100%;
+}
+
+.TopNavbar a {
+  text-decoration: none;
+}
+
+.NavLink {
+  color: grey;
+}
+
+.active {
+  color: black;
+}
+
+.pending {
+  color: blue;
+}

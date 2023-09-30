@@ -20,7 +20,6 @@ const Bubble: FC<BubbleProps> = ({
   type = MessageType.TEXT,
   ...props
 }) => {
-  console.log(props.content);
 
   return (
     <div
