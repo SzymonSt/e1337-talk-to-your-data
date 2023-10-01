@@ -1,6 +1,7 @@
 .TopNavbar {
   min-height: 60px;
   width: 100%;
+  row-gap: 10px;
 }
 
 .TopNavbar a {
@@ -17,6 +18,7 @@
 
 .select {
   width: fit-content;
+  margin: auto;
 }
 
 .pending {

@@ -23,18 +23,8 @@ const useLangChain = () => {
   }, []);
 
   const askAgent = async (question: string): Promise<Data> => {
-    console.log("chatHistory0", chatHistory);
     const data = await LangChainService.askAgent(chatHistory, question);
-    console.log("chatHistory1", data.chat_history, chatHistory);
     setChatHistory([...(data.chat_history || [])]);
-    //   createHistoryItem(question, "human"),
-    //   createHistoryItem(data.response, "ai"),
-
-    // setChatHistory((prev) => [
-    //   ...prev,
-    //   ,
-    // ]);
-
     // TODO : save to local storage
     return data;
   };

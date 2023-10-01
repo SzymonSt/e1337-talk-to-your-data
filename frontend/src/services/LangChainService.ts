@@ -1,5 +1,3 @@
-import axios, { AxiosInstance } from "axios";
-import { BASE_URL } from "../constants";
 import AxiosClient from "./AxiosClient";
 
 interface AskAgentPayload {
