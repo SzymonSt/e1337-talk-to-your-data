@@ -43,11 +43,11 @@ class SQLAgentExecutor:
              callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]))
         else:
             self.llm = OpenAI(temperature=0.1)
-            self.db = sqlite3.connect("./db/hackathon.db")
             self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
             self.toolkit = SQLDatabaseToolkit(db=self.chain_executor_db, llm=self.llm)
             self.agent = create_sql_agent(llm=self.llm, toolkit=self.toolkit, verbose=True)
         self.llm_mode = llm_mode
+        self.db = sqlite3.connect("./db/hackathon.db")
 
     def execute_natural_language_query(self, natural_language_query, context):
         buffer = io.StringIO()
