@@ -1,44 +1,48 @@
 # SQLucjan Finance Web Application
 
 ## Description
-SQLucjan is designed for the Ministry of Finance, transforming natural language inquiries into SQL queries to extract data from databases. Users type their queries in natural language, receive a response from the LLM along with the SQL query used. They can tweak this query and run it to fetch data directly from the database, bypassing the AI. SQLucjan operates offline, ensuring data security.
+SQLucjan is designed for the Ministry of Finance, transforming natural language inquiries into SQL queries to extract data from databases. Users type their queries in natural language, receive a response from the LLM along with the used SQL query. They can tweak this query and run it to fetch data directly from the database, bypassing the AI. SQLucjan is able to operate offline because of it's modularity, ensuring data security.
 
+## LLM
+### Basic
+Basic setup uses openai gpt-4 model. set `OPENAI_API_KEY=sk-xxxxxxxxx`.
+
+### Advanced
+To run llm in localhost mode advanced setup is required.
+Install ollama software to manage and host llama local models: <br>
+```bash
+sudo curl -L https://ollama.ai/download/ollama-linux-amd64 -o /usr/bin/ollama
+sudo chmod +x /usr/bin/ollama
+```
+Serve model as api: <br>
+```bash
+ollama server
+```
+Run llama version: <br>
+```bash
+ollama run llama2:13b
+```
+It is accessible via `http://localhost:11434` <br>
 ## Backend
 
 ### Building the Docker Image
 
-Ensure Docker is installed.
-
-During the build process, you can provide an argument `LOCAL_LLM_URL` to automatically download an open-source LLM model into the application container. Replace `<LLM_URL>` with the actual URL of the LLM model.
-
+Basic
+(./api)
 ```bash
-docker build -t sqlucjan-app --build-arg LOCAL_LLM_URL=<LLM_URL> .
+docker build --build-arg OPENAI_API_KEY=XXXXXX -t sqlucjan-app:latest .
 ```
 
-### Running the Application
-
-#### Using Docker
-
-Run the Docker container:
-
+Advanced
+(./api)
 ```bash
-docker run -p 8081:8081 sqlucjan-app
+docker build -t sqlucjan-app:latest -f local.Dockerfile .
 ```
 
 ## Frontend
 
-### Running the Application
+(./frontend)
+```bash
+docker build -t sqlucjan-fronted:latest  .
+```
 
-#### Development Mode
-
-1. Navigate to the project directory in your terminal.
-2. Install the necessary dependencies with `npm install`.
-3. Start the application in development mode with `npm start`.
-4. Access the application in your web browser at `http://localhost:3000`.
-
-#### Production Mode
-
-1. Build the project for production with `npm run build`.
-2. Install a static server globally with `npm install -g serve`.
-3. Start the application in production mode with `serve -s build`.
-4. Access the application in your web browser at the provided URL.

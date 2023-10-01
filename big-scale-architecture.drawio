@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" modified="2023-10-01T06:17:42.352Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="mvCNC2PArs_pQ1e3iXUy" version="21.7.5" type="device">
+  <diagram name="Strona-1" id="gCx9oQ7heF4_RQwmKs3c">
+    <mxGraphModel dx="1134" dy="617" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="XRFuZTi211O8Z0zxFE68-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="70" width="530" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-1" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="20" y="440" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-2" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="165" y="260" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-3" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="205" y="290" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-5" value="" style="sketch=0;html=1;dashed=0;whitespace=wrap;fillColor=#2875E2;strokeColor=#ffffff;points=[[0.005,0.63,0],[0.1,0.2,0],[0.9,0.2,0],[0.5,0,0],[0.995,0.63,0],[0.72,0.99,0],[0.5,1,0],[0.28,0.99,0]];verticalLabelPosition=bottom;align=center;verticalAlign=top;shape=mxgraph.kubernetes.icon;prIcon=master" vertex="1" parent="1">
+          <mxGeometry x="600" y="40" width="90" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-6" value="Kubernetes cluster" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="500" y="400" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-7" value="Multiple replicas of sqlucjan API because of it stateless nature" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="295" y="300" width="110" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-8" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="20" y="510" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-9" value="zestaw baz danych obsługiwanych przez SQLucjana" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry y="584.5" width="100" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-10" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="177.5" y="550" width="135" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-11" value="Self hosted LargeLanguageModel" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="182.5" y="630" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-12" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;" vertex="1" parent="1">
+          <mxGeometry x="550" y="140" width="80" height="67.2" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-13" value="NoSQL in memory database for caching user&#39;s sessions and chat context" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="535" y="207.2" width="110" height="73" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-14" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="100" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-15" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="130" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-16" value="Multiple replicas of sqlucjan frontend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="284" y="100" width="110" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-19" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=55;exitDy=60.00000000000001;exitPerimeter=0;entryX=0.635;entryY=-0.03;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="XRFuZTi211O8Z0zxFE68-3" target="XRFuZTi211O8Z0zxFE68-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="420" y="410" as="sourcePoint" />
+            <mxPoint x="470" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-20" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="560" as="sourcePoint" />
+            <mxPoint x="80" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-21" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.021;entryY=0.767;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="XRFuZTi211O8Z0zxFE68-15" target="XRFuZTi211O8Z0zxFE68-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="270" as="sourcePoint" />
+            <mxPoint x="490" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XRFuZTi211O8Z0zxFE68-22" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0;entryDx=70;entryDy=0;entryPerimeter=0;exitX=0;exitY=0;exitDx=55;exitDy=60.00000000000001;exitPerimeter=0;" edge="1" parent="1" source="XRFuZTi211O8Z0zxFE68-15" target="XRFuZTi211O8Z0zxFE68-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="420" y="390" as="sourcePoint" />
+            <mxPoint x="470" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

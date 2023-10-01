@@ -1,0 +1,20 @@
+version: '3'
+services:
+  backend:
+    image: sqlucjan-app:latest
+    ports:
+      - "8081:8081"
+    networks:
+      - app_network
+
+  frontend:
+    image: sqlucjan-frontend:latest
+    ports:
+      - "80:80"
+    networks:
+      - app_network
+    depends_on:
+      - fastapi
+
+networks:
+  app_network:
