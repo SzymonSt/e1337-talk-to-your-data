@@ -12,7 +12,9 @@ const SchemaTable: FC<SchemaTableProps> = (props) => {
     <div className={styles.SchemaTable}>
       <table>
         <tr>
-          <td colSpan={2}>{props.tableName}</td>
+          <td colSpan={2}>
+            <strong>{props.tableName}</strong>
+          </td>
         </tr>
 
         {Object.keys(props.properties).map((prop) => (

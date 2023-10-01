@@ -14,6 +14,12 @@
   overflow-y: auto;
   border-radius: 0.5em;
   background-color: #414b5a;
+  padding-right: 50px !important;
+}
+
+.TextareaElement span {
+  background-color: inherit;
+  color: white;
 }
 
 .ButtonGroup {
@@ -23,4 +29,9 @@
   bottom: 0;
   right: 0;
   justify-content: flex-end;
+}
+
+.PrimaryButton {
+  background-color: #8300fe;
+  border: 0;
 }

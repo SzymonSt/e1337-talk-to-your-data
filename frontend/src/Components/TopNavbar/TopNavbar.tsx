@@ -60,23 +60,23 @@ const TopNavbar: FC<TopNavbarProps> = () => {
                 {langCtx.language === "ENG" ? "Schema" : "Struktura"}
               </NavLink>
             </Nav.Link>
+            <Form.Select
+              aria-label="Default select example"
+              onChange={onLanguageChangeHandler}
+              value={langCtx.language}
+              className={styles.select}
+            >
+              <option value="ENG">🇬🇧 English</option>
+              <option value="POL">🇵🇱 Polski</option>
+            </Form.Select>
           </Nav>
-          <Form.Select
-            aria-label="Default select example"
-            onChange={onLanguageChangeHandler}
-            value={langCtx.language}
-            className={styles.select}
-          >
-            <option value="ENG">🇬🇧 English</option>
-            <option value="POL">🇵🇱 Polski</option>
-          </Form.Select>
         </Navbar.Collapse>
 
         {/* <Navbar.Collapse className="justify-content-center"></Navbar.Collapse> */}
 
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Powered by <strong>SQLucjan</strong>
+            Powered by <strong style={{ color: "#fb00d8" }}>SQLucjan</strong>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
