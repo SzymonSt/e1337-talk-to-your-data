@@ -1,6 +1,9 @@
 version: '3'
 services:
   backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     image: sqlucjan-app:latest
     ports:
       - "8081:8081"
@@ -8,6 +11,9 @@ services:
       - app_network
 
   frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     image: sqlucjan-frontend:latest
     ports:
       - "80:80"
@@ -18,3 +24,4 @@ services:
 
 networks:
   app_network:
+    driver: bridge
