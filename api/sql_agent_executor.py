@@ -89,4 +89,41 @@ class SQLAgentExecutor:
                 column_name = line.split()[0].strip('"')
                 column_names.append(column_name)
 
-        return column_names
+    def get_current_schema(self):
+        tables = {}
+        GET_SCHEMA_QUERY = "SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';"
+        GET_TABLES_QUERY = "PRAGMA table_info({table})"
+        cursor = self.db.cursor()
+        try:
+            result = cursor.execute(GET_SCHEMA_QUERY)
+        except Exception as e:
+            print(e)
+            cursor.close()
+            return None
+        result = cursor.fetchall()
+        try:
+            for table in result:
+                table_name = table[0]
+                table_columns = cursor.execute(GET_TABLES_QUERY.format(table=table_name))
+                table_columns = cursor.fetchall()
+                tables[table_name] = {column[1]: column[2] for column in table_columns}            
+        except Exception as e:
+            print(e)
+            cursor.close()
+            return None
+        cursor.close()
+        return tables
+
+
+    def set_schema(self, query: str):
+        cursor = self.db.cursor()
+        try:
+            result = cursor.execute(query)
+        except Exception as e:
+            print(e)
+            cursor.close()
+            return None
+        result = cursor.fetchall()
+        self.db.commit()
+        cursor.close()
+        return result

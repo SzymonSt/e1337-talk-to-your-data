@@ -63,6 +63,16 @@ def main():
 
         return {"result": content, "chat_history": chat_history}
     
+    @app.get("/get_schema")
+    async def get_schema():
+        schema = executor.get_current_schema()
+        return {"result": schema}
+    
+    @app.post("/send_sql")
+    async def set_schema(req: Request):
+        body = await req.json()
+        sql_query=body['sql']
+        result = executor.set_schema(sql_query)
 
     uvicorn.run(app, host="0.0.0.0", port=8081)
 
