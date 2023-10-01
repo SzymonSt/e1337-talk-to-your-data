@@ -5,6 +5,7 @@ import { InputMode, MessageType, WHO } from "../../enums";
 import styles from "./Chat.module.css";
 import useLangChain from "../../hooks/useLangChain";
 import { Message } from "../../types";
+import { v4 as uuidv4 } from "uuid";
 
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -28,7 +29,7 @@ const Chat = () => {
     setMessages((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         who: WHO.HUMAN,
         type: MessageType.TEXT,
         content,
@@ -41,13 +42,13 @@ const Chat = () => {
     setMessages((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         who: WHO.AI,
         type: MessageType.TEXT,
         content: data.response,
       },
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         who: WHO.AI,
         type: MessageType.SQL,
         content: data["sql_query"],
@@ -62,7 +63,7 @@ const Chat = () => {
     setMessages((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         who: WHO.HUMAN,
         type: MessageType.SQL,
         content,
@@ -79,7 +80,7 @@ const Chat = () => {
     setMessages((prev) => [
       ...prev,
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         who: WHO.AI,
         type: MessageType.TABLE,
         content: data.result,
