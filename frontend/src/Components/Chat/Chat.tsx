@@ -6,60 +6,6 @@ import styles from "./Chat.module.css";
 import useLangChain from "../../hooks/useLangChain";
 import { Message } from "../../types";
 
-// const MOCK_MESSAGES: Message[] = [
-//   {
-//     id: 4,
-//     who: WHO.HUMAN,
-//     type: MessageType.TEXT,
-//     content:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//   },
-//   {
-//     id: 1,
-//     who: WHO.AI,
-//     type: MessageType.TEXT,
-//     content:
-//       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//   },
-//   {
-//     id: 2,
-//     who: WHO.AI,
-//     type: MessageType.SQL,
-//     content: `SELECT * \nFROM users \nWHERE age >= 18;`,
-//   },
-//   {
-//     id: 3,
-//     who: WHO.AI,
-//     type: MessageType.TABLE,
-//     content: [
-//       {
-//         id: 1,
-//         "first name": "John",
-//         surname: "Smith",
-//         some: "This is a very long row",
-//         lorem: "ipsum",
-//         some1: "This is a very long row",
-//         some2: "This is a very long row",
-//         some3: "This is a very long row",
-//         some4: "This is a very long row",
-//         some5: "This is a very long row",
-//       },
-//       {
-//         id: 2,
-//         "first name": "Jack",
-//         surname: "Sparrow",
-//         some: "This is a very long row",
-//         lorem: "ipsum",
-//         some1: "This is a very long row",
-//         some2: "This is a very long row",
-//         some3: "This is a very long row",
-//         some4: "This is a very long row",
-//         some5: "This is a very long row",
-//       },
-//     ],
-//   },
-// ];
-
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const { askAgent, executeSqlQuery } = useLangChain();
@@ -137,8 +83,6 @@ const Chat = () => {
       },
     ]);
   };
-
-  // TODO : ADD EXECUTE BUTTON TO SQL EDIT IN MESSAGE
 
   return (
     <div className={styles.Chat}>

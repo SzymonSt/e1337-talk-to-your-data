@@ -1,8 +1,9 @@
 import CodeMirror, { ViewUpdate } from "@uiw/react-codemirror";
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import styles from "./SQLInput.module.css";
 import { Button } from "react-bootstrap";
 import { sql } from "@codemirror/lang-sql";
+import { languageContext } from "../../../../context/LanguageContext";
 
 interface SQLInputProps {
   defaultInput: string;
@@ -11,6 +12,8 @@ interface SQLInputProps {
 }
 
 const SQLInput: FC<SQLInputProps> = (props) => {
+  const langCtx = useContext(languageContext);
+
   const [content, setContent] = useState(props.defaultInput);
   const onChange = (val: string, viewUpdate: ViewUpdate) => {
     setContent(val);
@@ -32,7 +35,7 @@ const SQLInput: FC<SQLInputProps> = (props) => {
         className={styles.ExecuteButton}
         onClick={onExecuteClickHandler}
       >
-        Execute
+        {langCtx.language === "ENG" ? "Execute" : "Wykonaj"}
       </Button>
       <Button
         variant="dark"

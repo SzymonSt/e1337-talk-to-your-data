@@ -1,13 +1,15 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useContext, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import styles from "./TextInput.module.css";
+import { languageContext } from "../../../../context/LanguageContext";
 
 interface TextInputProps {
   onAsk: (contents: string) => void;
 }
 
 const TextInput: FC<TextInputProps> = (props) => {
-  //   const [input, setInput] = useState("");
+  const langCtx = useContext(languageContext);
+
   const inputRef = useRef<HTMLDivElement>(null);
 
   const onClickHandler = () => {
@@ -30,7 +32,7 @@ const TextInput: FC<TextInputProps> = (props) => {
           className={styles.Button}
           onClick={onClickHandler}
         >
-          Ask
+          {langCtx.language === "ENG" ? "Ask" : "Zapytaj"}
         </Button>
       </div>
     </>

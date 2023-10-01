@@ -1,0 +1,31 @@
+.Schema {
+  height: calc(100% - 60px);
+}
+
+.SQLInput {
+  height: calc(50%);
+  position: relative;
+}
+
+.TablesView {
+  height: calc(50%);
+  display: flex;
+  column-gap: 20px;
+  padding: 20px;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.CodeEditor {
+  text-align: left;
+  height: 100%;
+}
+
+.SaveButton {
+  position: absolute;
+  z-index: 999;
+  right: 25px;
+  border-radius: 0.5em;
+  bottom: 25px;
+}

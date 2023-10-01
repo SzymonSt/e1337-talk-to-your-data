@@ -15,6 +15,11 @@
   color: black;
 }
 
+.select {
+  width: fit-content;
+  margin: auto;
+}
+
 .pending {
   color: blue;
 }
