@@ -31,7 +31,7 @@ const Schema: FC<SchemaProps> = (props) => {
   };
 
   const onExecuteHandler = async () => {
-    await AxiosClient.getInstance().post("/send-sql", {
+    await AxiosClient.getInstance().post("/send_sql", {
       sql: sqlInput,
     });
 

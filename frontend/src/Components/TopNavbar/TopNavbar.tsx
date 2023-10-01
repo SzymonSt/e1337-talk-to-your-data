@@ -45,22 +45,7 @@ const TopNavbar: FC<TopNavbarProps> = () => {
                 {langCtx.language === "ENG" ? "Chat" : "Czat"}
               </NavLink>
             </Nav.Link>
-            <Nav.Link>
-              <NavLink
-                to="/database-connection"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? `${styles.pending}`
-                    : isActive
-                    ? styles.active
-                    : styles.NavLink
-                }
-              >
-                {langCtx.language === "ENG"
-                  ? "Database Connection"
-                  : "Połączenie z Bazą Danych"}
-              </NavLink>
-            </Nav.Link>
+
             <Nav.Link>
               <NavLink
                 to="/schema"
