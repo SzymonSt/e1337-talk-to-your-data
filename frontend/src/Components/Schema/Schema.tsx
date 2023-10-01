@@ -31,17 +31,17 @@ const Schema: FC<SchemaProps> = (props) => {
   };
 
   const onExecuteHandler = async () => {
-    await AxiosClient.getInstance().post("/send-sql", {
+    await AxiosClient.getInstance().post("/send_sql", {
       sql: sqlInput,
     });
 
-    const response = await AxiosClient.getInstance().get("/get-schema");
+    const response = await AxiosClient.getInstance().get("/get_schema");
     setTablesProperties(response.data.result);
   };
 
   useEffect(() => {
     const download = async () => {
-      const response = await AxiosClient.getInstance().get("/get-schema");
+      const response = await AxiosClient.getInstance().get("/get_schema");
       setTablesProperties(response.data.result);
     };
     download();

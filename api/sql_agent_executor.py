@@ -20,7 +20,7 @@ class SQLAgentExecutor:
         else:
             self.llm = OpenAI(temperature=0.1)
         self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
-        self.db = sqlite3.connect("./db/test.d")
+        self.db = sqlite3.connect("./db/hackathon.db")
         self.toolkit = SQLDatabaseToolkit(db=self.chain_executor_db, llm=self.llm)
         self.agent = create_sql_agent(llm=self.llm, toolkit=self.toolkit, verbose=True)
 
@@ -118,7 +118,7 @@ class SQLAgentExecutor:
     def set_schema(self, query: str):
         cursor = self.db.cursor()
         try:
-            result = cursor.execute(query)
+            result = cursor.executescript(query)
         except Exception as e:
             print(e)
             cursor.close()
