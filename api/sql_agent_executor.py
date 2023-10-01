@@ -18,8 +18,8 @@ class SQLAgentExecutor:
              model="llama2", 
              callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]))
         else:
-            self.llm = OpenAI(temperature=0.1)
-        self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
+            self.llm = OpenAI(model="gpt-4", model_name="gpt-4", temperature=0.1)
+        self.chain_executor_db = SQLDatabase.from_uri("sqlite:///db/hackathon.db")
         self.db = sqlite3.connect("./db/hackathon.db")
         self.toolkit = SQLDatabaseToolkit(db=self.chain_executor_db, llm=self.llm)
         self.agent = create_sql_agent(llm=self.llm, toolkit=self.toolkit, verbose=True)
