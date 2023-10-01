@@ -13,16 +13,41 @@ from constants import DATABASE_URI
 
 class SQLAgentExecutor:
     def __init__(self, llm_mode: str):
+        self.template = """[INST] <<SYS>>
+                    You are SQL and DDL queries generator.
+
+        There are few rules:
+        1. You can only generate SQL and DDL queries. If user provides a message based on which you cannot generate a query,
+        you should answer with a message "I don't understand, can you precise what data you want to create or retrieve?
+
+        2. Users can define their own data structures. You should be able to generate queries for any data structure using DDL.
+
+        3. Users can define their own data. You should be able to generate queries for any data using SQL.
+
+        4. You return just the query string in content and no other text.
+
+        5. Generate queries for PostgreSQL.
+
+        6. If users asks to retrive the data from tables or columns that are not in the schema, 
+        you answer with a message: I cannot find this data.
+              <</SYS>>
+            Based on following database schema:
+            Tables: {tables}
+            And follwing message:
+            {message}
+            Generate SQL query
+            [/INST]"""
         if llm_mode == 'local':
             self.llm = Ollama(base_url="http://localhost:11434", 
-             model="llama2", 
+             model="llama2:13b", 
              callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]))
         else:
             self.llm = OpenAI(temperature=0.1)
-        self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
-        self.db = sqlite3.connect("./db/hackathon.db")
-        self.toolkit = SQLDatabaseToolkit(db=self.chain_executor_db, llm=self.llm)
-        self.agent = create_sql_agent(llm=self.llm, toolkit=self.toolkit, verbose=True)
+            self.db = sqlite3.connect("./db/hackathon.db")
+            self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
+            self.toolkit = SQLDatabaseToolkit(db=self.chain_executor_db, llm=self.llm)
+            self.agent = create_sql_agent(llm=self.llm, toolkit=self.toolkit, verbose=True)
+        self.llm_mode = llm_mode
 
     def execute_natural_language_query(self, natural_language_query, context):
         buffer = io.StringIO()
@@ -46,8 +71,14 @@ class SQLAgentExecutor:
         return None
     
     def ask_agent(self, question, context):
-        response, logs = self.execute_natural_language_query(question, context)
-        last_sql_query = self.get_last_sql_query(logs)
+        if self.llm_mode == 'local':
+            curret_schema = self.get_current_schema()
+            message_from_temlate = self.template.format(tables=curret_schema, message=question)
+            res = self.llm(message_from_temlate)
+            print(res)
+        else:
+            response, logs = self.execute_natural_language_query(question, context)
+            last_sql_query = self.get_last_sql_query(logs)
         return response, last_sql_query, logs
     
     def execute_sql_query(self, sql_query) -> (dict, list):
