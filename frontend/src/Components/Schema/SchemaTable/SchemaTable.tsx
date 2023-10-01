@@ -4,6 +4,7 @@ import { TableProperties } from "../Schema";
 
 interface SchemaTableProps {
   properties: TableProperties;
+  tableName: string;
 }
 
 const SchemaTable: FC<SchemaTableProps> = (props) => {
@@ -11,17 +12,15 @@ const SchemaTable: FC<SchemaTableProps> = (props) => {
     <div className={styles.SchemaTable}>
       <table>
         <tr>
-          <td colSpan={2}>{props.properties.name}</td>
+          <td colSpan={2}>{props.tableName}</td>
         </tr>
 
-        {Object.keys(props.properties)
-          .filter((prop) => prop !== "name")
-          .map((prop) => (
-            <tr key={prop}>
-              <td>{prop}</td>
-              <td>{props.properties[prop]}</td>
-            </tr>
-          ))}
+        {Object.keys(props.properties).map((prop) => (
+          <tr key={prop}>
+            <td>{prop}</td>
+            <td>{props.properties[prop]}</td>
+          </tr>
+        ))}
       </table>
     </div>
   );

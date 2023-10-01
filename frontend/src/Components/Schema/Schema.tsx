@@ -11,13 +11,16 @@ import SchemaTable from "./SchemaTable/SchemaTable";
 interface SchemaProps {}
 
 export interface TableProperties {
-  name: string;
   [key: string]: string | number | boolean;
 }
 
+interface TablesProperties {
+  [tableName: string]: TableProperties;
+}
+
 const Schema: FC<SchemaProps> = (props) => {
-  const [tablesProperties, setTablesProperties] = useState<TableProperties[]>(
-    []
+  const [tablesProperties, setTablesProperties] = useState<TablesProperties>(
+    {}
   );
 
   const langCtx = useContext(languageContext);
@@ -27,19 +30,19 @@ const Schema: FC<SchemaProps> = (props) => {
     setSqlInput(val);
   };
 
-  const onSaveHandler = async () => {
+  const onExecuteHandler = async () => {
     await AxiosClient.getInstance().post("/send-sql", {
       sql: sqlInput,
     });
 
     const response = await AxiosClient.getInstance().get("/get-schema");
-    setTablesProperties(response.data);
+    setTablesProperties(response.data.result);
   };
 
   useEffect(() => {
     const download = async () => {
       const response = await AxiosClient.getInstance().get("/get-schema");
-      setTablesProperties(response.data);
+      setTablesProperties(response.data.result);
     };
     download();
   }, []);
@@ -47,10 +50,11 @@ const Schema: FC<SchemaProps> = (props) => {
   return (
     <div className={styles.Schema}>
       <div className={styles.TablesView}>
-        {tablesProperties.map((tableProperties) => (
+        {Object.keys(tablesProperties).map((tableName) => (
           <SchemaTable
-            key={tableProperties["name"]}
-            properties={tableProperties}
+            key={tableName}
+            tableName={tableName}
+            properties={tablesProperties[tableName]}
           />
         ))}
       </div>
@@ -58,7 +62,7 @@ const Schema: FC<SchemaProps> = (props) => {
         <Button
           variant="primary"
           className={styles.SaveButton}
-          onClick={onSaveHandler}
+          onClick={onExecuteHandler}
         >
           {langCtx.language === "ENG" ? "Execute SQL" : "Wykonaj SQL"}
         </Button>
