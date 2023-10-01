@@ -51,7 +51,7 @@ const SQLInputExtension: FC<SQLInputExtensionProps> = (props) => {
         value={content}
         theme={"dark"}
         height="200px"
-        extensions={[sql({})]}
+        extensions={[sql({ upperCaseKeywords: true })]}
         editable={false}
         // onChange={onChange}
       />

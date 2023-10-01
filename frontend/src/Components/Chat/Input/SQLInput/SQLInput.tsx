@@ -48,7 +48,7 @@ const SQLInput: FC<SQLInputProps> = (props) => {
         value={content}
         theme={"dark"}
         height="150px"
-        extensions={[sql({})]}
+        extensions={[sql({ upperCaseKeywords: true })]}
         onChange={onChange}
       />
     </div>

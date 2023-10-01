@@ -27,7 +27,16 @@ const TopNavbar: FC<TopNavbarProps> = () => {
   return (
     <Navbar expand="lg" className={`bg-body-tertiary ${styles.TopNavbar}`}>
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand className={styles.Brand}>
+          <img
+            alt=""
+            src="/SQLucjan-logo.svg"
+            width="50"
+            height="30"
+            className="d-inline-block align-top"
+          />
+        </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -76,18 +85,23 @@ const TopNavbar: FC<TopNavbarProps> = () => {
               </NavLink>
             </Nav.Link>
           </Nav>
+          <Form.Select
+            aria-label="Default select example"
+            onChange={onLanguageChangeHandler}
+            value={langCtx.language}
+            className={styles.select}
+          >
+            <option value="ENG">🇬🇧 English</option>
+            <option value="POL">🇵🇱 Polski</option>
+          </Form.Select>
+        </Navbar.Collapse>
 
-          <Row>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={onLanguageChangeHandler}
-              value={langCtx.language}
-              className={styles.select}
-            >
-              <option value="ENG">🇬🇧 English</option>
-              <option value="POL">🇵🇱 Polski</option>
-            </Form.Select>
-          </Row>
+        {/* <Navbar.Collapse className="justify-content-center"></Navbar.Collapse> */}
+
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            Powered by <strong>SQLucjan</strong>
+          </Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>
