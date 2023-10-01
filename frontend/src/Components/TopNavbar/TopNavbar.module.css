@@ -1,0 +1,32 @@
+.TopNavbar {
+  min-height: 60px;
+  width: 100%;
+  row-gap: 10px;
+}
+
+.TopNavbar a {
+  text-decoration: none;
+}
+
+.NavLink {
+  color: grey;
+}
+
+.active {
+  color: black;
+}
+
+.select {
+  width: fit-content;
+  margin: auto;
+}
+
+.pending {
+  color: blue;
+}
+
+.Brand {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}

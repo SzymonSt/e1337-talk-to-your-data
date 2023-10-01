@@ -6,22 +6,21 @@ from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.sql_database import SQLDatabase
 from langchain.llms.openai import OpenAI
-from ctransformers import AutoModelForCausalLM
+from langchain.llms import Ollama
+from langchain.callbacks.manager import CallbackManager
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler 
 from constants import DATABASE_URI
 
 class SQLAgentExecutor:
     def __init__(self, llm_mode: str):
         if llm_mode == 'local':
-            self.llm = AutoModelForCausalLM.from_pretrained(
-                "../model/llama-2-7b-chat.Q5_K_M.gguf",
-                model_type="llama",
-                max_new_tokens=1096,
-                temperature=0.1,
-            )
+            self.llm = Ollama(base_url="http://localhost:11434", 
+             model="llama2", 
+             callback_manager = CallbackManager([StreamingStdOutCallbackHandler()]))
         else:
             self.llm = OpenAI(temperature=0.1)
         self.chain_executor_db = SQLDatabase.from_uri(DATABASE_URI)
-        self.db = sqlite3.connect("./db/test.d")
+        self.db = sqlite3.connect("./db/hackathon.db")
         self.toolkit = SQLDatabaseToolkit(db=self.chain_executor_db, llm=self.llm)
         self.agent = create_sql_agent(llm=self.llm, toolkit=self.toolkit, verbose=True)
 
@@ -90,4 +89,41 @@ class SQLAgentExecutor:
                 column_name = line.split()[0].strip('"')
                 column_names.append(column_name)
 
-        return column_names
+    def get_current_schema(self):
+        tables = {}
+        GET_SCHEMA_QUERY = "SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';"
+        GET_TABLES_QUERY = "PRAGMA table_info({table})"
+        cursor = self.db.cursor()
+        try:
+            result = cursor.execute(GET_SCHEMA_QUERY)
+        except Exception as e:
+            print(e)
+            cursor.close()
+            return None
+        result = cursor.fetchall()
+        try:
+            for table in result:
+                table_name = table[0]
+                table_columns = cursor.execute(GET_TABLES_QUERY.format(table=table_name))
+                table_columns = cursor.fetchall()
+                tables[table_name] = {column[1]: column[2] for column in table_columns}            
+        except Exception as e:
+            print(e)
+            cursor.close()
+            return None
+        cursor.close()
+        return tables
+
+
+    def set_schema(self, query: str):
+        cursor = self.db.cursor()
+        try:
+            result = cursor.executescript(query)
+        except Exception as e:
+            print(e)
+            cursor.close()
+            return None
+        result = cursor.fetchall()
+        self.db.commit()
+        cursor.close()
+        return result

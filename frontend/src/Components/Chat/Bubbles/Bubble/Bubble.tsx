@@ -12,6 +12,7 @@ interface BubbleProps {
   isIconShown?: boolean;
   type: MessageType;
   onSQLModifyClick?: (content: string) => void;
+  onSQLExecuteClick?: (contents: string) => void;
 }
 
 const Bubble: FC<BubbleProps> = ({
@@ -19,7 +20,6 @@ const Bubble: FC<BubbleProps> = ({
   type = MessageType.TEXT,
   ...props
 }) => {
-  console.log(props.content);
 
   return (
     <div
@@ -31,6 +31,7 @@ const Bubble: FC<BubbleProps> = ({
         <SQLInputExtension
           content={props.content}
           onSQLModifyClick={props.onSQLModifyClick}
+          onSQLExecuteClick={props.onSQLExecuteClick}
         />
       )}
       {type === MessageType.TABLE && <TableExtension content={props.content} />}
