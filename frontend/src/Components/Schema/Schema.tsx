@@ -37,6 +37,7 @@ const Schema: FC<SchemaProps> = (props) => {
 
     const response = await AxiosClient.getInstance().get("/get_schema");
     setTablesProperties(response.data.result);
+    setSqlInput("");
   };
 
   useEffect(() => {
