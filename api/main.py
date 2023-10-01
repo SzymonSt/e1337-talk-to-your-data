@@ -40,9 +40,10 @@ def main():
     executor = SQLAgentExecutor(llm_mode)
     
     @app.post("/ask_agent")
-    async def ask_agent(body: AskAgentBody):
-        chat_history = body.chat_history
-        question = body.question
+    async def ask_agent(req: Request):
+        body = await req.json()
+        chat_history = body["chat_history"]
+        question = body["question"]
         chat_history.append(HumanMessage(content=question))
         response, last_sql_query, logs = executor.ask_agent(question, chat_history)
         chat_history.append(AIMessage(content=last_sql_query))
