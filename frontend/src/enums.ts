@@ -7,6 +7,7 @@ export enum MessageType {
   "TEXT",
   "SQL",
   "TABLE",
+  "LOADER",
 }
 
 export enum InputMode {

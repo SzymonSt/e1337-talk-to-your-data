@@ -9,6 +9,7 @@ import { Message } from "../../types";
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const { askAgent, executeSqlQuery } = useLangChain();
+  const [isAiAnswerLoading, setIsAIAnswerLoading] = useState(false);
 
   const [inputMode, setInputMode] = useState<InputMode>(InputMode.TEXT);
 
@@ -33,8 +34,9 @@ const Chat = () => {
         content,
       },
     ]);
-
+    setIsAIAnswerLoading(true);
     const data = await askAgent(content);
+    setIsAIAnswerLoading(false);
 
     setMessages((prev) => [
       ...prev,
@@ -66,8 +68,9 @@ const Chat = () => {
         content,
       },
     ]);
-
+    setIsAIAnswerLoading(true);
     await onExecuteHandler(content);
+    setIsAIAnswerLoading(false);
   };
 
   const onExecuteHandler = async (content: string) => {
@@ -90,6 +93,7 @@ const Chat = () => {
         messages={messages}
         onSQLModifyClick={onSQLModifyClickHandler}
         onSQLExecuteClick={onExecuteHandler}
+        isAiAnswerLoading={isAiAnswerLoading}
       />
 
       <Input

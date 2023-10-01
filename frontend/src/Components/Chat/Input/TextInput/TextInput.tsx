@@ -1,4 +1,4 @@
-import React, { FC, useContext, useRef, useState } from "react";
+import React, { FC, useContext, useRef } from "react";
 import { Button } from "react-bootstrap";
 import styles from "./TextInput.module.css";
 import { languageContext } from "../../../../context/LanguageContext";
@@ -29,7 +29,7 @@ const TextInput: FC<TextInputProps> = (props) => {
       <div className={styles.ButtonGroup}>
         <Button
           variant="primary"
-          className={styles.Button}
+          className={`${styles.Button} ${styles.PrimaryButton}`}
           onClick={onClickHandler}
         >
           {langCtx.language === "ENG" ? "Ask" : "Zapytaj"}

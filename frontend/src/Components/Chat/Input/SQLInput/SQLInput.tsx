@@ -39,7 +39,7 @@ const SQLInput: FC<SQLInputProps> = (props) => {
       </Button>
       <Button
         variant="dark"
-        className={styles.CloseButton}
+        className={`${styles.CloseButton} ${styles.PrimaryButton}`}
         onClick={onCancelHandler}
       >
         X

@@ -4,11 +4,11 @@
   background-color: inherit;
   width: 100%;
   overflow-x: scroll;
-  color: #cbcbcb;
+  color: #fffdff;
   white-space: break-spaces;
 }
 
 .BubbleAI {
-  color: #cbcbcb;
-  background-color: #383f49;
+  color: white;
+  background-color: #fc00d645;
 }

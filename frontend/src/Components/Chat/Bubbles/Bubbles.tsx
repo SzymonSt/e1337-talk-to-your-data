@@ -2,14 +2,16 @@ import React, { FC, useEffect, useRef } from "react";
 import styles from "./Bubbles.module.css";
 import Bubble from "./Bubble/Bubble";
 import { Message } from "../../../types";
+import { MessageType, WHO } from "../../../enums";
 
 interface BubbleProps {
   messages: Message[];
   onSQLModifyClick?: (content: string) => void;
   onSQLExecuteClick?: (contents: string) => void;
+  isAiAnswerLoading?: boolean;
 }
 
-const Bubbles: FC<BubbleProps> = (props) => {
+const Bubbles: FC<BubbleProps> = ({ isAiAnswerLoading = false, ...props }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,6 +45,19 @@ const Bubbles: FC<BubbleProps> = (props) => {
           type={message.type}
         ></Bubble>
       ))}
+
+      {isAiAnswerLoading && (
+        <Bubble
+          onSQLModifyClick={props.onSQLModifyClick}
+          onSQLExecuteClick={props.onSQLExecuteClick}
+          who={WHO.AI}
+          key={"LOADING"}
+          isIconShown={true}
+          content={undefined}
+          type={MessageType.LOADER}
+        ></Bubble>
+      )}
+
       <div ref={bottomRef} />
     </div>
   );

@@ -18,6 +18,8 @@
 
 .select {
   width: fit-content;
+  background-color: transparent;
+  border: 0;
   margin: auto;
 }
 

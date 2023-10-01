@@ -5,6 +5,7 @@ import AIIcon from "./Icon/AIIcon";
 import HumanIcon from "./Icon/HumanIcon";
 import SQLInputExtension from "./ContentExtensions/SQLInputExtension/SQLInputExtension";
 import TableExtension from "./ContentExtensions/TableExtension/TableExtension";
+import { Rings } from "react-loader-spinner";
 
 interface BubbleProps {
   content?: any;
@@ -20,12 +21,23 @@ const Bubble: FC<BubbleProps> = ({
   type = MessageType.TEXT,
   ...props
 }) => {
-
   return (
     <div
       className={`${styles.Bubble} ${props.who === WHO.AI && styles.BubbleAI}`}
     >
       {isIconShown && (props.who === WHO.AI ? <AIIcon /> : <HumanIcon />)}
+      {type === MessageType.LOADER && (
+        <Rings
+          height="80"
+          width="80"
+          color="#fff"
+          radius="6"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="rings-loading"
+        />
+      )}
       {type === MessageType.TEXT && <p>{props.content}</p>}
       {type === MessageType.SQL && (
         <SQLInputExtension
