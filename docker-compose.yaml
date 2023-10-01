@@ -14,7 +14,7 @@ services:
     networks:
       - app_network
     depends_on:
-      - fastapi
+      - backend
 
 networks:
   app_network:

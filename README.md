@@ -43,6 +43,6 @@ docker build -t sqlucjan-app:latest -f local.Dockerfile .
 
 (./frontend)
 ```bash
-docker build -t sqlucjan-fronted:latest  .
+docker build -t sqlucjan-frontend:latest  .
 ```
 
