@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "../constants";
+import AxiosClient from "./AxiosClient";
 
 interface AskAgentPayload {
   chat_history: Object[];
@@ -12,20 +13,15 @@ interface ExecuteSqlQueryPayload {
 }
 
 class LangChainService {
-  private client: AxiosInstance;
-
-  constructor() {
-    this.client = axios.create({
-      baseURL: BASE_URL, // Replace with your API base URL
-    });
-  }
-
   async askAgent(chatHistory: Object[], question: string) {
     const payload: AskAgentPayload = {
       chat_history: chatHistory,
       question: question,
     };
-    const response = await this.client.post("/ask_agent", payload);
+    const response = await AxiosClient.getInstance().post(
+      "/ask_agent",
+      payload
+    );
     return response.data;
   }
 
@@ -34,7 +30,10 @@ class LangChainService {
       query: sqlQuery,
       chat_history: chatHistory,
     };
-    const response = await this.client.post("/execute_sql_query", payload);
+    const response = await AxiosClient.getInstance().post(
+      "/execute_sql_query",
+      payload
+    );
     return response.data;
   }
 }
